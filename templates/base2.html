@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='font-awesome/css/all.min.css')}}">
+</head>
+
+<body class="bg-light">
+{% if current_user.is_authenticated %}
+  {% include "navbar.html" %}
+
+  {% include "sidebar.html" %}
+{% endif %}
+
+{% block content %}{% endblock %}
+
+  <!--Footer-->
+  <section id="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col">
+                  <p class="pb-2 mt-3 text-center">&copy; 2020 FCOM. All Right Reserved.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+  <script src="{{url_for('static',filename='jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='jquery-easing/jquery.easing.min.js')}}"></script>
+  <script src="{{url_for('static',filename='js/scrolling-nav.js')}}"></script>
+  <!--/Footer-->
+
+
+</body>
+
+</html>
