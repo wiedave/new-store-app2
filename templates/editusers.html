@@ -1,0 +1,157 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Admin Page{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+
+    <!--Nav-->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top p-1">
+        <div class="container-fluid">
+            <a class="navbar-brand pl-4" href="#">FCOM Admin</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#NavCol">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="NavCol">
+                <ul class="navbar-nav ml-auto">
+                    <li class="dropdown px-2">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="fas fa-user"></i> {{current_user.username}}</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"><i class="fas fa-user-circle"></i> Profil</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Pengaturan</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('logout')}}"><i class="fas fa-power-off"></i> Keluar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Nav Akhir-->
+
+    <!--Logo-->
+    <section id="logo" style="margin-top: 90px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="box-logo bg-white text-center mb-2 p-1">
+                        <img src="{{url_for('static',filename='images/logo.jpg')}}" style="width: 150px;" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/Logo-->
+
+    <!--Sidebar-->
+    <section id="sidebar" class="mt-2 pt-2">
+        <div class="container-fluid">
+            <div class="row">
+                <!--Sidebar Wrapper-->
+                <div class="col-lg-2 pb-3">
+                    <div class="box-sidebar bg-white">
+                        <!--Sidebar Header-->
+                        <div class="box-sidebar-header bg-primary">
+                            <h4 class="text-white text-center">Main Nav</h4>
+                        </div>
+                        <!--/Sidebar Header-->
+
+                        <!--Sidebar Body-->
+                        <div class="box-body">
+                            <div class="pt-3">
+                                <ul class="list-unstyled components">
+                                    <li class="py-2 b-b">
+                                        <a href="{{url_for('users')}}" style="text-decoration: none;"><i
+                                                class="fas fa-window-restore p-2 fa-1x"></i> Users</a>
+                                    </li>
+                                    <li class="py-2 b-b">
+                                        <a href="add.report.html" style="text-decoration: none;"><i
+                                                class="fas fa-plus-square p-2 fa-1x"></i> Add Report</a>
+                                    </li>
+                                    <li class="py-2">
+                                        <a href="customer.html" style="text-decoration: none;"><i
+                                                class="fas fa-plus-square p-2 fa-1x"></i> Add Customer</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--/Sidebar Body-->
+                    </div>
+                </div>
+                <!--/Sidebar Wrapper-->
+
+                <!--Content-->
+                <div class="col-lg-10">
+                    <!--Content Wrapper-->
+                    <div class="box-content">
+                        <!--Content Header-->
+                        <div class="box-content-header bg-primary">
+                            <h4 class="text-white text-center">Edit Users</h4>
+                        </div>
+                        <!--/Content Header-->
+
+                        <!--Content Body-->
+                        <div class="box-body">
+                            <!--Nav Search-->
+
+                            {% for mess  in get_flashed_messages() %}
+                                <div class="alert alert-warning alert-dismissible fade show mt-3" role='alert'>
+                                  <button type="button" class="fade close" data-dismiss='alert' aria-label='Close'>
+                                  <span aria-hidden="false">&times;</span>
+                                  </button>
+                                  {{mess}}
+                                </div>
+                            {% endfor %}
+                            <nav class="navbar navbar-light float-right p-3">
+
+                            </nav>
+                            <!--/Nav Search-->
+
+                            <!--Table-->
+                            <form  action="{{url_for('edit',user_id=users.id)}}" method="POST">
+                                {{form.hidden_tag()}}
+                                <div class="box-content-body">
+                                  <div class="form-group">
+                                      <label for="username">{{form.username.label}}</label>
+                                      {{form.username(class="form-control form-control-md",readonly=True)}}
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="role">{{form.role.label}}</label>
+                                      {{form.role(class="form-control form-control-md")}}
+                                  </div>
+
+                              <button class="btn btn-warning btn-block" type="submit">Update</button>
+                            </form>
+                            </div>
+                            <!--/Table-->
+                          </div>
+                        <!--/Content Body-->
+                    </div>
+                    <!--/Content Wrapper-->
+                </div>
+                <!--/Content-->
+            </div>
+        <!--Container-->
+
+    </section>
+    <!--Sidebar Akhir-->
+
+    <!--Footer-->
+    <section id="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="pb-2 mt-3 text-center">&copy; 2020 FCOM. All Right Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/Footer-->
+
+
+
+</body>
+{% endblock %}

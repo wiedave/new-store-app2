@@ -1,0 +1,41 @@
+<!--Nav-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top p-1">
+    <div class="container-fluid">
+        <a class="navbar-brand pl-4" href="#">FCOM Admin</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#NavCol">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--Collapse-->
+        <div class="collapse navbar-collapse" id="NavCol">
+            <ul class="navbar-nav ml-auto">
+                <li class="dropdown px-2">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>{{current_user.username}}</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item"><i class="fas fa-user-circle"></i> Profil</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Pengaturan</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}"><i class="fas fa-power-off"></i> Keluar</a>
+                </li>
+            </ul>
+        </div>
+        <!--/Collapse-->
+    </div>
+</nav>
+<!--/Nav-->
+
+<!--Logo-->
+<section id="logo" style="margin-top: 90px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="box-logo bg-white text-center mb-2 p-1">
+                    <img src="{{url_for('static',filename='images/logo.jpg')}}" style="width: 150px;" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Logo-->
