@@ -1,0 +1,44 @@
+How to use github!!
+
+If your contributor:
+    fork it first!!
+
+First things first:
+    terminal:  git clone https://github.com/myusername/myrepository.git
+    # The folder with the name of the repository will be added to the files!!
+
+Second things second:
+    add/put all the files that you want to add/put to the repository!
+
+Third things third:
+    terminal:  git add .
+    # You can also stage all unsaved changes to the github with Atom
+
+Fourth thi... Ok, I'll stop.
+
+terminal:  git commit -am "message"
+# You can just use "git commit" but it will hace no message.
+# You could also use Atom
+
+terminal: git push
+# It will be pushed to the repository in github. YAY!
+
+You've done it!!!
+But that's not it...
+You can also fetch and pull data from other contributors updating the data!
+
+terminal:  git fetch
+terminal:  git pull
+
+if your a contributor, not the creator, then you have to pull request like in
+this pull.png!
+then click new pull request!
+it should automaticly compare the forked version from you with the old version
+that the creator has!!
+if not then choose it manually!!
+don't be stupid... you should remember by now!
+
+and the creator will consider merging it or not!!
+creators choice...
+
+That is it!! i guess...
