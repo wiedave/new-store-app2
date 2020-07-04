@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-{% block title %}Admin Page{% endblock %}
+{% block title %}Add Product Group{% endblock %}
 
 {% block content %}
                 <!--Content-->
@@ -8,7 +8,7 @@
                     <div class="box-content">
                         <!--Content Header-->
                         <div class="box-content-header bg-primary">
-                            <h4 class="text-white text-center">Users</h4>
+                            <h4 class="text-white text-center">Add Product Group</h4>
                         </div>
                         <!--/Content Header-->
 
@@ -30,32 +30,15 @@
                             <!--/Nav Search-->
 
                             <!--Table-->
-                            <form  action="{{url_for('addusers')}}" method="POST">
+                            <form  action="{{url_for('groups.add')}}" method="POST">
                                 {{form.hidden_tag()}}
                                 <div class="box-content-body">
                                   <div class="form-group">
-                                      <label for="username">{{form.username.label}}</label>
-                                      {{form.username(class="form-control form-control-md")}}
+                                      <label for="groupname">{{form.groupname.label}}</label>
+                                      {{form.groupname(class="form-control form-control-md")}}
                                   </div>
 
-                                  <div class="form-group">
-                                      <label for="password">{{form.password.label}}</label>
-                                      {{form.password(class="form-control form-control-md")}}
-                                  </div>
-
-                                  <div class="form-group">
-                                      <label for="confirmpassword">{{form.confirm_password.label}}</label>
-                                      {{form.confirm_password(class="form-control form-control-md")}}
-                                  </div>
-                                  {% for error in form.password.errors %}
-                                    <span class="badge badge-danger">{{ error}}</span>
-                                  {% endfor %}
-
-                                  <div class="form-group">
-                                      <label for="role">{{form.role.label}}</label>
-                                      {{form.role(class="form-control form-control-md")}}
-                                  </div>
-                                  <button class="btn btn-danger btn-block" type="submit">Add</button>
+                                <button class="btn btn-danger btn-block" type="submit">Add</button>
                             </div>
                             </form>
                             <!--/Table-->

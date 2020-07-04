@@ -15,17 +15,20 @@
                     <div class="box-body">
                         <div class="pt-3">
                             <ul class="list-unstyled components">
+                              {% if current_user.role == 'admin' %}
                                 <li class="py-2 b-b">
-                                  <a href="{{url_for('users')}}" style="text-decoration: none;"><i
+                                  <a href="{{url_for('users.users')}}" style="text-decoration: none;"><i
                                           class="fas fa-window-restore p-2 fa-1x"></i> Users</a>
                                 </li>
+                              {% endif %}
+
                                 <li class="py-2 b-b">
-                                    <a href="add.report.html" style="text-decoration: none;"><i
-                                            class="fas fa-plus-square p-2 fa-1x"></i> Add Report</a>
+                                    <a href="{{url_for('groups.group')}}" style="text-decoration: none;"><i
+                                            class="fas fa-plus-square p-2 fa-1x"></i> Groups</a>
                                 </li>
                                 <li class="py-2">
-                                    <a href="customer.html" style="text-decoration: none;"><i
-                                            class="fas fa-plus-square p-2 fa-1x"></i> Add Customer</a>
+                                    <a href="{{url_for('brands.brand')}}" style="text-decoration: none;"><i
+                                            class="fas fa-plus-square p-2 fa-1x"></i> Brands</a>
                                 </li>
                             </ul>
                         </div>

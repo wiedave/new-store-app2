@@ -1,4 +1,5 @@
 {% extends "base2.html" %}
+
 {% block title %}Admin Page{% endblock %}
 
 {% block content %}
@@ -9,7 +10,7 @@
                     <div class="box-content">
                         <!--Content Header-->
                         <div class="box-content-header bg-primary">
-                            <h4 class="text-white text-center">Users</h4>
+                            <h4 class="text-white text-center">Product Brands</h4>
                         </div>
                         {% for mess in get_flashed_messages() %}
                             <div class="alert alert-warning alert-dismissible fade show mt-3" role='alert'>
@@ -35,25 +36,22 @@
 
                             <!--Table-->
                             <div class="p-3">
-                                <a href="{{url_for('addusers')}}" class="btn btn-primary" >Add Users</a>
+                                <a href="{{url_for('brands.add')}}" class="btn btn-primary" >Add Brand</a>
                                 <table id="example" class="table table-responsive-md table-striped table-bordered">
                                     <thead>
                                         <tr class="text-center">
                                             <th class="text-primary font-weight-bold">#</th>
-                                            <th class="text-primary font-weight-bold">Username</th>
-                                            <th class="text-primary font-weight-bold">Role</th>
+                                            <th class="text-primary font-weight-bold">Brand Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for user in users %}
+                                        {% for brand in brand_list %}
                                             <tr class="text-center">
-                                                <td>{{user.id}}</td>
-                                                <td>{{user.username}}</td>
-                                                <td>{{user.role}}</td>
+                                                <td>{{brand.id}}</td>
+                                                <td>{{brand.brandname}}</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-warning" href="{{url_for('edit',user_id=user.id)}}">Edit</a>
-                                                    <a class="btn btn-success" href="{{url_for('password',user_id=user.id)}}">Password</a>
-                                                    <a class="btn btn-danger" href="{{url_for('delete_user',user_id=user.id)}}">Hapus</button>
+                                                    <a class="btn btn-warning" href="{{url_for('brands.edit',brand_id=brand.id)}}">Edit</a>
+                                                    <a class="btn btn-danger" href="{{url_for('brands.delete',brand_id=brand.id)}}">Hapus</button>
                                                 </td>
                                             </tr>
                                         {% endfor %}
