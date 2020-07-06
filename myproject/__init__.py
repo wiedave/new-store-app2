@@ -26,7 +26,7 @@ from myproject.admin.views import admin_bp
 from myproject.admin.users.views import users_bp
 from myproject.admin.groups.views import group_bp
 from myproject.admin.brands.views import brand_bp
-
+from myproject.admin.products.views import product_bp
 
 
 app.register_blueprint(core)
@@ -34,3 +34,4 @@ app.register_blueprint(admin_bp,url_prefix='/adm2')
 app.register_blueprint(users_bp,url_prefix='/adm2/users')
 app.register_blueprint(group_bp,url_prefix='/adm2/groups')
 app.register_blueprint(brand_bp,url_prefix='/adm2/brands')
+app.register_blueprint(product_bp,url_prefix='/adm2/products')
