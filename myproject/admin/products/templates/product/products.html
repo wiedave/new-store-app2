@@ -54,12 +54,12 @@
                                                 <td>{{produk.id}}</td>
                                                 <td>{{produk.name}}</td>
                                                 <td>{{produk.price}}</td>
-                                                <td>{{produk.photo}}</td>
+                                                <td><img src="{{url_for('static',filename='upload_products/'+produk.photo)|safe}}" alt=""></td>
                                                 <td>{{produk.grup.groupname}}</td>
                                                 <td>{{produk.merek.brandname}}</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-warning" href="#">Edit</a>
-                                                    <a class="btn btn-danger" href="#">Hapus</a>
+                                                    <a class="btn btn-warning" href="{{url_for('products.edit',product_id=produk.id)}}">Edit</a>
+                                                    <a class="btn btn-danger" href="{{url_for('products.delete',product_id=produk.id)}}">Hapus</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
