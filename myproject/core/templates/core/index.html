@@ -9,12 +9,12 @@
     <div class="col-sm-12 col-md-6 col-lg-3">
       <div class="card">
         <div class="card-body">
-          <img src="{{url_for('static',filename='product.photo')}}" width="200" height="200" alt="{{product.photo}}"><br>
-          <h2>{{product.name}}</h2>
-          <h4>Group: {{product.grup.groupname}}</h4>
-          <h4>Brand: {{product.merek.brandname}}</h4>
-          <p>Description lorem ipsum kolor sih bau amet(lorem ipsum dolor sit amet).</p>
-          <span style="color:green;">Rp.{{product.price}}</span><br><br>
+          <img src="{{url_for('static',filename='upload_products/'+product.photo)}}" height="200" width="200" alt="{{product.photo}}"><br>
+          <h3 class="mt-3">{{product.name}}</h3>
+          <h5>Group: {{product.grup.groupname}}</h5>
+          <h5>Brand: {{product.merek.brandname}}</h5>
+          <p>Description lorem ipsum kolor lu sih bau amet(lorem ipsum dolor sit amet).</p>
+          <span style="color:green;">Rp.{{harga(product.price)}}</span><br><br>
           <a href="{{url_for('core.learn_more')}}"><button class="btn btn-outline-secondary">Learn More</button></a>
         </div>
       </div>
