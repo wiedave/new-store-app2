@@ -1,4 +1,28 @@
 {% extends "base.html" %}
-
-
-<h1>ini halaman home atau index</h1>
+{% block title %}Shopee{% endblock %}
+{% block content %}
+<div class="mt-4 container">
+  <h1 class="display-3">Products</h1>
+  <hr><br>
+  <div class="row mt-3">
+    {% for product in products %}
+    <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{url_for('static',filename='product.photo')}}" width="200" height="200" alt="{{product.photo}}"><br>
+          <h2>{{product.name}}</h2>
+          <h4>Group: {{product.grup.groupname}}</h4>
+          <h4>Brand: {{product.merek.brandname}}</h4>
+          <p>Description lorem ipsum kolor sih bau amet(lorem ipsum dolor sit amet).</p>
+          <span style="color:green;">Rp.{{product.price}}</span><br><br>
+          <a href="{{url_for('core.learn_more')}}"><button class="btn btn-outline-secondary">Learn More</button></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="mt-5 bg-dark py-3 text-white text-center">
+  <span>2020 Shop&copy;. All Rights Reserved.</span>
+</div>
+{% endblock %}
