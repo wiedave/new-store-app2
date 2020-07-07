@@ -3,8 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+import os
 
 app = Flask(__name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SECRET_KEY'] = 'mysecretkeyyes'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://gunawan:Belajar2020@192.168.100.99/hadi_produk_list'
