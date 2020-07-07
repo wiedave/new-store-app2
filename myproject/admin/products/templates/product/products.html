@@ -1,0 +1,95 @@
+{% extends "base2.html" %}
+
+{% block title %}Admin Page{% endblock %}
+
+{% block content %}
+
+                <!--Content-->
+                <div class="col-lg-10">
+                    <!--Content Wrapper-->
+                    <div class="box-content">
+                        <!--Content Header-->
+                        <div class="box-content-header bg-primary">
+                            <h4 class="text-white text-center">Products List</h4>
+                        </div>
+                        {% for mess in get_flashed_messages() %}
+                            <div class="alert alert-warning alert-dismissible fade show mt-3" role='alert'>
+                              <button type="button" class="fade close" data-dismiss='alert' aria-label='Close'>
+                              <span aria-hidden="false">&times;</span>
+                              </button>
+                              {{mess}}
+                            </div>
+                        {% endfor %}
+                        <!--/Content Header-->
+
+                        <!--Content Body-->
+                        <div class="box-body">
+                            <!--Nav Search-->
+                          <nav class="navbar navbar-light float-right p-3">
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2 border-primary" type="search" placeholder="Cari"
+                                        aria-label="Search">
+                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
+                                </form>
+                            </nav>
+                            <!--/Nav Search-->
+
+                            <!--Table-->
+                            <div class="p-3">
+                                <a href="{{url_for('products.add')}}" class="btn btn-primary" >Add Product</a>
+                                <table id="example" class="table table-responsive-md table-striped table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th class="text-primary font-weight-bold">#</th>
+                                            <th class="text-primary font-weight-bold">Product Name</th>
+                                            <th class="text-primary font-weight-bold">Product Price</th>
+                                            <th class="text-primary font-weight-bold">Product Photo</th>
+                                            <th class="text-primary font-weight-bold">Product Group</th>
+                                            <th class="text-primary font-weight-bold">Product Brand</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for produk in list_product %}
+                                            <tr class="text-center">
+                                                <td>{{produk.id}}</td>
+                                                <td>{{produk.name}}</td>
+                                                <td>{{produk.price}}</td>
+                                                <td>{{produk.photo}}</td>
+                                                <td>{{produk.grup.groupname}}</td>
+                                                <td>{{produk.merek.brandname}}</td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-warning" href="#">Edit</a>
+                                                    <a class="btn btn-danger" href="#">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--/Table-->
+
+                            <!--Pagination-->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination float-right pr-3">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                            <!--/Pagination-->
+                        </div>
+                        <!--/Content Body-->
+                    </div>
+                    <!--/Content Wrapper-->
+                </div>
+                <!--/Content-->
+            </div>
+        </div>
+        <!--Container-->
+    </section>
+    <!--Sidebar Akhir-->
+
+
+{% endblock %}
