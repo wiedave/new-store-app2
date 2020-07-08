@@ -1,6 +1,7 @@
 from flask import Blueprint,render_template,redirect,url_for,flash,request
 from flask_login import login_required
 from myproject import db,basedir
+from myproject.core.views import harga
 from myproject.models import Product,Group,Brand
 from myproject.admin.products.forms import ProductForm,EditProductForm
 from myproject.admin.products.picture_handler import add_product_pic
@@ -8,12 +9,12 @@ import os
 
 product_bp = Blueprint('products',__name__,template_folder='templates/product')
 
-
 @product_bp.route('/')
 @login_required
 def product():
-    list_product = Product.query.all()
-    return render_template("products.html",list_product=list_product)
+    page = request.args.get('page',1,type=int)
+    product_list = Product.query.order_by(Product.id.desc()).paginate(page=page,per_page=5)
+    return render_template("products.html",product_list=product_list,harga=harga)
 
 @product_bp.route('/add', methods=['GET','POST'])
 @login_required

@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-
+{% from "macro_pagination.html" import pagination %}
 {% block title %}Admin Page{% endblock %}
 
 {% block content %}
@@ -42,10 +42,11 @@
                                         <tr class="text-center">
                                             <th class="text-primary font-weight-bold">#</th>
                                             <th class="text-primary font-weight-bold">Brand Name</th>
+                                            <th class="text-primary font-weight-bold"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for brand in brand_list %}
+                                        {% for brand in brand_list.items %}
                                             <tr class="text-center">
                                                 <td>{{brand.id}}</td>
                                                 <td>{{brand.brandname}}</td>
@@ -61,15 +62,7 @@
                             <!--/Table-->
 
                             <!--Pagination-->
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination float-right pr-3">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                          {{pagination(brand_list,'brands.brand')}}
                             <!--/Pagination-->
                         </div>
                         <!--/Content Body-->
