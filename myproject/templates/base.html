@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="{{url_for('static',filename='font-awesome/css/all.min.css')}}">
 </head>
 <body>
+<<<<<<< HEAD
 
+=======
+>>>>>>> feb323379e85fd287c4eb9c4dcf913451b493fb3
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#"><i class="fas fa-shopping-cart"></i> Shop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,9 +30,10 @@
         <a class="nav-link" href="{{url_for('core.index')}}">Home</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+    <form class="form-inline my-2 my-lg-0" method="POST">
+      {{form.hidden_tag()}}
+      {{form.search(class="form-control mr-2", placeholder="Search")}}
+      {{form.submit(class="btn btn-success my-2 my-sm-0")}}
     </form>
   </div>
 </nav>
