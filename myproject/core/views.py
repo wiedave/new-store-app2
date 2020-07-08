@@ -1,5 +1,6 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template, request, redirect, url_for
 from myproject.models import Product
+from myproject.core.forms import SearchForm
 
 core = Blueprint('core',__name__,template_folder='templates/core')
 
@@ -17,10 +18,25 @@ def harga(price):
     num = "".join(num)
     return num
 
-@core.route('/')
+@core.route('/', methods=["GET", "POST"])
 def index():
     products = Product.query.all()
-    return render_template("index.html", products=products, harga=harga)
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('core.search', search=form.search.data))
+
+    return render_template("index.html", products=products, harga=harga, form=form)
+
+@core.route('/search/<search>', methods=["GET", "POST"])
+def search(search):
+    form = SearchForm()
+    sea = str(search)
+    product = Product.query.filter(Product.name.like('%'+sea+'%')).all()
+    if form.validate_on_submit():
+        return redirect(url_for('core.search', search=form.search.data))
+
+
+    return render_template('search.html', search=product, harga=harga, name=sea, form=form)
 
 @core.route('/learn_more')
 def learn_more():
