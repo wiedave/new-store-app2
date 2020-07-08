@@ -2,16 +2,36 @@ from flask import Blueprint,render_template,redirect,url_for,flash,request
 from flask_login import login_required
 from myproject import db
 from myproject.models import Group
-from myproject.admin.groups.forms import GroupForm
+from myproject.admin.groups.forms import GroupForm,SearchForm
 
 group_bp = Blueprint('groups',__name__,template_folder='templates/group')
 
-@group_bp.route('/')
+@group_bp.route('/', methods=['GET','POST'])
 @login_required
 def group():
-    grup = Group.query.all()
-    return render_template("groups.html",grouplist=grup)
+    page = request.args.get('page',1,type=int)
+    grup = Group.query.order_by(Group.id.desc()).paginate(page=page,per_page=5)
 
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('groups.search',searchname=form.search.data))
+    return render_template("groups.html",group_list=grup,form=form)
+
+@group_bp.route('/search<searchname>', methods=['GET','POST'])
+@login_required
+def search(searchname):
+    form = SearchForm()
+    page = request.args.get('page',1,type=int)
+    grup_search = Group.query.filter(Group.groupname.like('%'+searchname+'%')).order_by(Group.groupname.desc()).paginate(page=page,per_page=5)
+
+    if grup_search is None:
+        flash('Your search not found!!!')
+        return redirect(url_for('groups.group'))
+
+    if form.validate_on_submit():
+
+        return redirect(url_for('groups.search',searchname=form.search.data))
+    return render_template("groupsearch.html",form=form,searchname=searchname,group_search=grup_search)
 
 @group_bp.route('/add', methods=['GET','POST'])
 @login_required

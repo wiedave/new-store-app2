@@ -10,7 +10,8 @@ brand_bp = Blueprint('brands',__name__,template_folder='templates/brand')
 @brand_bp.route('/')
 @login_required
 def brand():
-    brand_list = Brand.query.all()
+    page = request.args.get('page',1,type=int)
+    brand_list = Brand.query.order_by(Brand.id.desc()).paginate(page=page,per_page=5)
     return render_template("brands.html",brand_list=brand_list)
 
 @brand_bp.route('/add',methods=['GET','POST'])

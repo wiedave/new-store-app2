@@ -11,9 +11,9 @@
       <div class="card">
         <div class="card-body">
           <img src="{{url_for('static',filename='upload_products/'+product.photo)}}" height="200" width="200" alt="{{product.photo}}"><br>
-          <h3 class="mt-3">{{product.name}}</h3>
-          <h5>Group: {{product.grup.groupname}}</h5>
-          <h5>Brand: {{product.merek.brandname}}</h5>
+          <p class="mt-3">{{product.name | truncate(20)}}</p>
+          <p>Group: {{product.grup.groupname}}</p>
+          <p>Brand: {{product.merek.brandname}}</p>
           <p>Description lorem ipsum kolor lu sih bau amet(lorem ipsum dolor sit amet).</p>
           <span style="color:green;">Rp.{{harga(product.price)}}</span><br><br>
           <a href="{{url_for('core.learn_more')}}"><button class="btn btn-outline-secondary">Learn More</button></a>
@@ -26,13 +26,4 @@
 <div class="mt-5 bg-dark py-3 text-white text-center">
   <span>2020 Shop&copy;. All Rights Reserved.</span>
 </div>
-=======
-{% extends "base2.html" %}
-
-{% block content %}
-
-<h1>ini halaman home atau index</h1>
-
-
->>>>>>> 311df5dfebca6300024ff4085c2da0cbc391d927
 {% endblock %}

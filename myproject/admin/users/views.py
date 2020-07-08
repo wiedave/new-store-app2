@@ -11,10 +11,11 @@ users_bp = Blueprint('users',__name__,template_folder='templates/users')
 
 @users_bp.route('/')
 @login_required
-def users():
+def user():
     if current_user.role =="admin":
-        users = User.query.all()
-        return render_template('users.html', users=users)
+        page = request.args.get('page',1,type=int)
+        users_list = User.query.order_by(User.id.desc()).paginate(page=page,per_page=5)
+        return render_template('users.html', users_list=users_list)
     else:
         flash('You are not authorize!!!')
         return render_template('admin.html')
