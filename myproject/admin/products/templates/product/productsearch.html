@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-{% from "macro_pagination.html" import pagination %}
+{% from "macro_pagination.html" import pagination_search %}
 
 {% block title %}Admin Page{% endblock %}
 
@@ -27,7 +27,7 @@
                         <div class="box-body">
                             <!--Nav Search-->
                           <nav class="navbar navbar-light float-right p-3">
-                                <form class="form-inline" method="POST">
+                                <form class="form-inline" method='POST'>
                                   {{form.hidden_tag()}}
                                   {{form.search(class="form-control mr-sm-2 border-primary")}}
                                   <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
@@ -51,12 +51,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for produk in product_list.items %}
+                                        {% for produk in product_search.items %}
                                             <tr class="text-center">
                                                 <td>{{produk.id}}</td>
                                                 <td>{{produk.name}}</td>
                                                 <td><span style="color:green;">Rp.{{harga(produk.price)}}</span></td>
-                                                <td><img src="{{url_for('static',filename='upload_products/'+produk.photo)|safe}}" alt=""></td>
+                                                <td><img src="{{url_for('static',filename='upload_products/'+produk.photo)}}" alt=""></td>
                                                 <td>{{produk.grup.groupname}}</td>
                                                 <td>{{produk.merek.brandname}}</td>
                                                 <td class="text-center">
@@ -71,7 +71,7 @@
                             <!--/Table-->
 
                             <!--Pagination-->
-                            {{pagination(product_list, 'products.product')}}
+                            {{pagination_search(product_search, 'products.product',product_search.name)}}
                             <!--/Pagination-->
                         </div>
                         <!--/Content Body-->

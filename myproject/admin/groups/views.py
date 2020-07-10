@@ -14,7 +14,12 @@ def group():
 
     form = SearchForm()
     if form.validate_on_submit():
-        return redirect(url_for('groups.search',searchname=form.search.data))
+        grup_search= Group.query.filter(Group.groupname.like('%'+form.search.data+'%')).first()
+        if not grup_search :
+            flash('Your search not found!!!')
+            return redirect(url_for('groups.group'))
+        else:
+            return redirect(url_for('groups.search',searchname=form.search.data))
     return render_template("groups.html",group_list=grup,form=form)
 
 @group_bp.route('/search<searchname>', methods=['GET','POST'])
@@ -22,16 +27,16 @@ def group():
 def search(searchname):
     form = SearchForm()
     page = request.args.get('page',1,type=int)
-    grup_search = Group.query.filter(Group.groupname.like('%'+searchname+'%')).order_by(Group.groupname.desc()).paginate(page=page,per_page=5)
-
-    if grup_search is None:
-        flash('Your search not found!!!')
-        return redirect(url_for('groups.group'))
+    grup_search_list = Group.query.filter(Group.groupname.like('%'+searchname+'%')).order_by(Group.groupname.desc()).paginate(page=page,per_page=5)
 
     if form.validate_on_submit():
+        grup_search = Group.query.filter(Group.groupname.like('%'+form.search.data+'%')).first()
+        if not grup_search:
+            flash('Your search not found!!!')
+            return redirect(url_for('groups.group'))
 
         return redirect(url_for('groups.search',searchname=form.search.data))
-    return render_template("groupsearch.html",form=form,searchname=searchname,group_search=grup_search)
+    return render_template("groupsearch.html",form=form,searchname=searchname,group_search=grup_search_list)
 
 @group_bp.route('/add', methods=['GET','POST'])
 @login_required
