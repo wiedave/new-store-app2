@@ -1,6 +1,5 @@
 {% extends "base2.html" %}
-{% from "macro_pagination.html" import pagination %}
-
+{% from "macro_pagination.html" import pagination_search %}
 {% block title %}Admin Page{% endblock %}
 
 {% block content %}
@@ -11,7 +10,7 @@
                     <div class="box-content">
                         <!--Content Header-->
                         <div class="box-content-header bg-primary">
-                            <h4 class="text-white text-center">Products List</h4>
+                            <h4 class="text-white text-center">Product Brands</h4>
                         </div>
                         {% for mess in get_flashed_messages() %}
                             <div class="alert alert-warning alert-dismissible fade show mt-3" role='alert'>
@@ -28,40 +27,32 @@
                             <!--Nav Search-->
                           <nav class="navbar navbar-light float-right p-3">
                                 <form class="form-inline" method="POST">
-                                  {{form.hidden_tag()}}
-                                  {{form.search(class="form-control mr-sm-2 border-primary")}}
-                                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
+                                    {{form.hidden_tag()}}
+                                    {{form.search(class="form-control mr-sm-2 border-primary")}}
+                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
                                 </form>
                             </nav>
                             <!--/Nav Search-->
 
                             <!--Table-->
                             <div class="p-3">
-                                <a href="{{url_for('products.add')}}" class="btn btn-primary" >Add Product</a>
+                                <a href="{{url_for('brands.add')}}" class="btn btn-primary" >Add Brand</a>
                                 <table id="example" class="table table-responsive-md table-striped table-bordered">
                                     <thead>
                                         <tr class="text-center">
                                             <th class="text-primary font-weight-bold">#</th>
-                                            <th class="text-primary font-weight-bold">Product Name</th>
-                                            <th class="text-primary font-weight-bold">Product Price</th>
-                                            <th class="text-primary font-weight-bold">Product Photo</th>
-                                            <th class="text-primary font-weight-bold">Product Group</th>
-                                            <th class="text-primary font-weight-bold">Product Brand</th>
+                                            <th class="text-primary font-weight-bold">Brand Name</th>
                                             <th class="text-primary font-weight-bold"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for produk in product_list.items %}
+                                        {% for brand in brand_search.items %}
                                             <tr class="text-center">
-                                                <td>{{produk.id}}</td>
-                                                <td>{{produk.name}}</td>
-                                                <td><span style="color:green;">Rp.{{harga(produk.price)}}</span></td>
-                                                <td><img src="{{url_for('static',filename='upload_products/'+produk.photo)|safe}}" alt=""></td>
-                                                <td>{{produk.grup.groupname}}</td>
-                                                <td>{{produk.merek.brandname}}</td>
+                                                <td>{{brand.id}}</td>
+                                                <td>{{brand.brandname}}</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-warning" href="{{url_for('products.edit',product_id=produk.id)}}">Edit</a>
-                                                    <a class="btn btn-danger" href="{{url_for('products.delete',product_id=produk.id)}}">Hapus</a>
+                                                    <a class="btn btn-warning" href="{{url_for('brands.edit',brand_id=brand.id)}}">Edit</a>
+                                                    <a class="btn btn-danger" href="{{url_for('brands.delete',brand_id=brand.id)}}">Hapus</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -71,7 +62,7 @@
                             <!--/Table-->
 
                             <!--Pagination-->
-                            {{pagination(product_list, 'products.product')}}
+                          {{pagination_search(brand_search,'brands.brand',brand_search.brandname)}}
                             <!--/Pagination-->
                         </div>
                         <!--/Content Body-->
