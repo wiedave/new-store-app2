@@ -38,6 +38,8 @@ def search(search):
 
     return render_template('search.html', search=product, harga=harga, name=sea, form=form)
 
-@core.route('/learn_more')
-def learn_more():
-    return 'Hah go back to the nether to kill piglins!'#render_template("index.html")
+@core.route('/learn_more/<int:id>')
+def learn_more(id):
+    product = Product.query.filter(Product.id==id).first()
+
+    return render_template("read_more.html", product=product)
