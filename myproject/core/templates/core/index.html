@@ -9,24 +9,22 @@
     {% for product in products %}
     <div class="col-sm-12 col-md-6 col-lg-3 my-4">
       <div class="card">
+        <a href="{{url_for('core.learn_more')}}" style="color:black; text-decoration:none;">
+
+          <img class="card-img-top" src="{{url_for('static',filename='upload_products/'+product.photo)}}" height="200" width="200" alt="{{product.photo}}"><br>
+
         <div class="card-body">
-          <img src="{{url_for('static',filename='upload_products/'+product.photo)}}" height="200" width="200" alt="{{product.photo}}"><br>
-<<<<<<< HEAD
-          <p class="mt-3">{{product.name | truncate(20)}}</p>
-          <p>Group: {{product.grup.groupname}}</p>
-          <p>Brand: {{product.merek.brandname}}</p>
-=======
-          <h5 class="mt-3">{{product.name|truncate(16)}}</h5>
-          <h6>Group: {{product.grup.groupname}}</h6>
-          <h6>Brand: {{product.merek.brandname}}</h6>
->>>>>>> feb323379e85fd287c4eb9c4dcf913451b493fb3
-          <p>Description lorem ipsum kolor lu sih bau amet(lorem ipsum dolor sit amet).</p>
-          <span style="color:green;">Rp.{{harga(product.price)}}</span><br><br>
-          <a href="{{url_for('core.learn_more')}}"><button class="btn btn-outline-secondary">Learn More</button></a>
+          <p class="mt-3">{{product.name|truncate(30)}}</p>
+          <span style="color:green;"><b>Rp.{{harga(product.price)}}</b></span><br><br>
         </div>
+        <div class="card-footer">
+          <small>Group: {{product.grup.groupname}} ;</small>
+          <small>Brand: {{product.merek.brandname}}</small>
+        </div>
+          </a>
       </div>
     </div>
-    {% endfor %}
+  {% endfor %}
   </div>
 </div>
 <div class="mt-5 bg-dark py-3 text-white text-center">

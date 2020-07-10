@@ -3,18 +3,43 @@ from flask_login import login_required
 from myproject import db,basedir
 from myproject.core.views import harga
 from myproject.models import Product,Group,Brand
+from myproject.core.forms import SearchForm
 from myproject.admin.products.forms import ProductForm,EditProductForm
 from myproject.admin.products.picture_handler import add_product_pic
 import os
 
 product_bp = Blueprint('products',__name__,template_folder='templates/product')
 
-@product_bp.route('/')
+@product_bp.route('/', methods=['GET','POST'])
 @login_required
 def product():
     page = request.args.get('page',1,type=int)
     product_list = Product.query.order_by(Product.id.desc()).paginate(page=page,per_page=5)
-    return render_template("products.html",product_list=product_list,harga=harga)
+
+    form = SearchForm()
+    if form.validate_on_submit():
+        product_search = Product.query.filter(Product.name.like('%'+form.search.data+'%')).first()
+        if not product_search:
+            flash('Your search not found !!!')
+            return redirect(url_for('products.product'))
+        return redirect(url_for('products.search',searchname=form.search.data))
+    return render_template("products.html",product_list=product_list,harga=harga,form=form)
+
+@product_bp.route('/search<searchname>',methods=['GET','POST'])
+@login_required
+def search(searchname):
+    page = request.args.get('page',1,type=int)
+    product_search_list = Product.query.filter(Product.name.like('%'+searchname+'%')).order_by(Product.name.desc()).paginate(page=page,per_page=5)
+
+    form = SearchForm()
+    if form.validate_on_submit():
+        product_search = Product.query.filter(Product.name.like('%'+form.search.data+'%')).first()
+        if not product_search:
+            flash('Your search not found !!!')
+            return redirect(url_for('products.product'))
+        return redirect(url_for('products.search',searchname=form.search.data))
+    return render_template("productsearch.html",form=form,product_search=product_search_list,searchname=searchname,harga=harga)
+
 
 @product_bp.route('/add', methods=['GET','POST'])
 @login_required

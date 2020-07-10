@@ -26,9 +26,9 @@
                         <div class="box-body">
                             <!--Nav Search-->
                           <nav class="navbar navbar-light float-right p-3">
-                                <form class="form-inline">
-                                    <input class="form-control mr-sm-2 border-primary" type="search" placeholder="Cari"
-                                        aria-label="Search">
+                                <form class="form-inline" method="POST">
+                                    {{form.hidden_tag()}}
+                                    {{form.search(class="form-control mr-sm-2 border-primary")}}
                                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Cari</button>
                                 </form>
                             </nav>
@@ -52,7 +52,7 @@
                                                 <td>{{brand.brandname}}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-warning" href="{{url_for('brands.edit',brand_id=brand.id)}}">Edit</a>
-                                                    <a class="btn btn-danger" href="{{url_for('brands.delete',brand_id=brand.id)}}">Hapus</button>
+                                                    <a class="btn btn-danger" href="{{url_for('brands.delete',brand_id=brand.id)}}">Hapus</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

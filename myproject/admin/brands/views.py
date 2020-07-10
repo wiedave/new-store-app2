@@ -3,16 +3,42 @@ from flask_login import login_required
 from myproject import db
 from myproject.models import Brand
 from myproject.admin.brands.forms import BrandForm
+from myproject.core.forms import SearchForm
 
 brand_bp = Blueprint('brands',__name__,template_folder='templates/brand')
 
 
-@brand_bp.route('/')
+@brand_bp.route('/',methods=['GET','POST'])
 @login_required
 def brand():
     page = request.args.get('page',1,type=int)
     brand_list = Brand.query.order_by(Brand.id.desc()).paginate(page=page,per_page=5)
-    return render_template("brands.html",brand_list=brand_list)
+
+    form = SearchForm()
+    if form.validate_on_submit():
+        brand_search = Brand.query.filter(Brand.brandname.like('%'+form.search.data+'%')).first()
+        if not brand_search:
+            flash('Your search not found!!!')
+            return redirect(url_for('brands.brand'))
+        else:
+            return redirect(url_for('brands.search',searchname=form.search.data))
+    return render_template("brands.html",brand_list=brand_list,form=form)
+
+@brand_bp.route('/search<searchname>', methods=['GET','POST'])
+@login_required
+def search(searchname):
+    form = SearchForm()
+    page = request.args.get('page',1,type=int)
+    brand_search_list = Brand.query.filter(Brand.brandname.like('%'+searchname+'%')).order_by(Brand.id.desc()).paginate(page=page,per_page=5)
+
+    if form.validate_on_submit():
+        brand_search = Brand.query.filter(Brand.brandname.like('%'+form.search.data+'%')).first()
+        if not brand_search:
+            flash('Your search not found !!!')
+            return redirect(url_for('brands.brand'))
+        else:
+            return redirect(url_for('brands.search',searchname=form.search.data))
+    return render_template('brandsearch.html', form=form,brand_search=brand_search_list,searchname=searchname)
 
 @brand_bp.route('/add',methods=['GET','POST'])
 @login_required
