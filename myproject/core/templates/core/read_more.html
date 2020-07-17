@@ -1,3 +1,21 @@
 {% extends "base.html" %}
 {% block title %}{{product.name}}{% endblock %}
-           
+
+{% block content %}
+<div class="container">
+  <div class="bg-light py-5 mt-5 row">
+    <div class="col-md-4 d-none d-sm-none d-md-none d-lg-block">
+      <img src="{{url_for('static',filename='upload_products/'+product.photo)}}" height="300" width="300" alt="{{product.photo}}"><br>
+    </div>
+    <div class="col-lg-8 col-md-12">
+      <h1>{{product.name}}</h1>
+      <hr>
+      <h2 style="color:green;">Rp{{harga(product.price)}}</h2>
+      <hr>
+      <h3>Group: {{product.grup.groupname}}</h3><br>
+      <h3>Brand: {{product.merek.brandname}}</h3>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
